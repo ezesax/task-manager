@@ -97,3 +97,13 @@ C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\bin\es\System.Web.WebP
 C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskMana.7A261BF7.Up2Date
 C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.dll
 C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\obj\Debug\TaskManagerAPI.pdb
+C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\bin\BCrypt.Net-Next.dll
+C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\bin\System.Buffers.dll
+C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\bin\System.Memory.dll
+C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\bin\System.Numerics.Vectors.dll
+C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\bin\BCrypt.Net-Next.xml
+C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\bin\System.Buffers.xml
+C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\bin\System.Memory.xml
+C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\bin\System.Numerics.Vectors.xml
+C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\bin\System.Runtime.CompilerServices.Unsafe.xml

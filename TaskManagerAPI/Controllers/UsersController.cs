@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Web.Http;
+using BCrypt.Net;
 using TaskManagerAPI.Models;
 
 public class UsersController : ApiController
@@ -34,6 +35,8 @@ public class UsersController : ApiController
             return BadRequest(ModelState);
         }
 
+        user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
+
         _context.Users.Add(user);
         _context.SaveChanges();
 
@@ -51,6 +54,11 @@ public class UsersController : ApiController
         if (id != user.Id)
         {
             return BadRequest();
+        }
+
+        if (!string.IsNullOrWhiteSpace(user.PasswordHash))
+        {
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
         }
 
         _context.Entry(user).State = EntityState.Modified;
