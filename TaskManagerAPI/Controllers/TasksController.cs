@@ -6,6 +6,7 @@ using TaskManagerAPI.Models;
 
 namespace TaskManagerAPI.Controllers
 {
+    [Authorize]
     public class TasksController : ApiController
     {
         private DBContext _context = new DBContext();

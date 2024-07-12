@@ -4,82 +4,86 @@ using System.Web.Http;
 using System.Linq;
 using TaskManagerAPI.Models;
 
-public class ProjectsController : ApiController
+namespace TaskManagerAPI.Controllers
 {
-    private DBContext _context = new DBContext();
-
-    // GET: api/projects
-    public IHttpActionResult GetProjects()
+    [Authorize]
+    public class ProjectsController : ApiController
     {
-        var projects = _context.Projects.ToList();
-        return Ok(projects);
-    }
+        private DBContext _context = new DBContext();
 
-    // GET: api/projects/5
-    public IHttpActionResult GetProject(int id)
-    {
-        var project = _context.Projects.SingleOrDefault(p => p.Id == id);
-        if (project == null)
+        // GET: api/projects
+        public IHttpActionResult GetProjects()
         {
-            return NotFound();
-        }
-        return Ok(project);
-    }
-
-    // POST: api/projects
-    public IHttpActionResult PostProject(Project project)
-    {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
+            var projects = _context.Projects.ToList();
+            return Ok(projects);
         }
 
-        _context.Projects.Add(project);
-        _context.SaveChanges();
-
-        return CreatedAtRoute("DefaultApi", new { id = project.Id }, project);
-    }
-
-    // PUT: api/projects/5
-    public IHttpActionResult PutProject(int id, Project project)
-    {
-        if (!ModelState.IsValid)
+        // GET: api/projects/5
+        public IHttpActionResult GetProject(int id)
         {
-            return BadRequest(ModelState);
+            var project = _context.Projects.SingleOrDefault(p => p.Id == id);
+            if (project == null)
+            {
+                return NotFound();
+            }
+            return Ok(project);
         }
 
-        if (id != project.Id)
+        // POST: api/projects
+        public IHttpActionResult PostProject(Project project)
         {
-            return BadRequest();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _context.Projects.Add(project);
+            _context.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = project.Id }, project);
         }
 
-        _context.Entry(project).State = EntityState.Modified;
-        _context.SaveChanges();
-
-        return StatusCode(HttpStatusCode.NoContent);
-    }
-
-    // DELETE: api/projects/5
-    public IHttpActionResult DeleteProject(int id)
-    {
-        var project = _context.Projects.Find(id);
-        if (project == null)
+        // PUT: api/projects/5
+        public IHttpActionResult PutProject(int id, Project project)
         {
-            return NotFound();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != project.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(project).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        _context.Projects.Remove(project);
-        _context.SaveChanges();
-
-        return Ok(project);
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
+        // DELETE: api/projects/5
+        public IHttpActionResult DeleteProject(int id)
         {
-            _context.Dispose();
+            var project = _context.Projects.Find(id);
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            _context.Projects.Remove(project);
+            _context.SaveChanges();
+
+            return Ok(project);
         }
-        base.Dispose(disposing);
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

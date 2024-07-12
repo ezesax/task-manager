@@ -5,89 +5,94 @@ using System.Web.Http;
 using BCrypt.Net;
 using TaskManagerAPI.Models;
 
-public class UsersController : ApiController
+namespace TaskManagerAPI.Controllers
 {
-    private DBContext _context = new DBContext();
-
-    // GET: api/users
-    public IHttpActionResult GetUsers()
+    [Authorize]
+    public class UsersController : ApiController
     {
-        var users = _context.Users.ToList();
-        return Ok(users);
-    }
+        private DBContext _context = new DBContext();
 
-    // GET: api/users/5
-    public IHttpActionResult GetUser(int id)
-    {
-        var user = _context.Users.Find(id);
-        if (user == null)
+        // GET: api/users
+        public IHttpActionResult GetUsers()
         {
-            return NotFound();
-        }
-        return Ok(user);
-    }
-
-    // POST: api/users
-    public IHttpActionResult PostUser(User user)
-    {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
+            var users = _context.Users.ToList();
+            return Ok(users);
         }
 
-        user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
-
-        _context.Users.Add(user);
-        _context.SaveChanges();
-
-        return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
-    }
-
-    // PUT: api/users/5
-    public IHttpActionResult PutUser(int id, User user)
-    {
-        if (!ModelState.IsValid)
+        // GET: api/users/5
+        public IHttpActionResult GetUser(int id)
         {
-            return BadRequest(ModelState);
+            var user = _context.Users.Find(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
         }
 
-        if (id != user.Id)
+        // POST: api/users
+        [AllowAnonymous]
+        public IHttpActionResult PostUser(User user)
         {
-            return BadRequest();
-        }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        if (!string.IsNullOrWhiteSpace(user.PasswordHash))
-        {
             user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
+
+            _context.Users.Add(user);
+            _context.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
         }
 
-        _context.Entry(user).State = EntityState.Modified;
-        _context.SaveChanges();
-
-        return StatusCode(HttpStatusCode.NoContent);
-    }
-
-    // DELETE: api/users/5
-    public IHttpActionResult DeleteUser(int id)
-    {
-        var user = _context.Users.Find(id);
-        if (user == null)
+        // PUT: api/users/5
+        public IHttpActionResult PutUser(int id, User user)
         {
-            return NotFound();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != user.Id)
+            {
+                return BadRequest();
+            }
+
+            if (!string.IsNullOrWhiteSpace(user.PasswordHash))
+            {
+                user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
+            }
+
+            _context.Entry(user).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        _context.Users.Remove(user);
-        _context.SaveChanges();
-
-        return Ok(user);
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
+        // DELETE: api/users/5
+        public IHttpActionResult DeleteUser(int id)
         {
-            _context.Dispose();
+            var user = _context.Users.Find(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+
+            return Ok(user);
         }
-        base.Dispose(disposing);
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
