@@ -14,19 +14,19 @@ namespace TaskManagerAPI.Controllers
         // GET: api/Tasks
         public IQueryable<Task> GetTasks()
         {
-            return _context.Tasks;  // Devuelve todas las tareas
+            return _context.Tasks;
         }
 
         // GET: api/Tasks/5
         public IHttpActionResult GetTask(int id)
         {
-            Task task = _context.Tasks.Find(id);  // Busca una tarea por ID
+            Task task = _context.Tasks.Find(id);
             if (task == null)
             {
-                return NotFound();  // Devuelve 404 si la tarea no se encuentra
+                return NotFound();
             }
 
-            return Ok(task);  // Devuelve la tarea encontrada
+            return Ok(task);
         }
 
         // POST: api/Tasks
@@ -34,13 +34,13 @@ namespace TaskManagerAPI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);  // Valida el modelo antes de agregar la tarea
+                return BadRequest(ModelState);
             }
 
-            _context.Tasks.Add(task);  // Agrega una nueva tarea
-            _context.SaveChanges();  // Guarda los cambios en la base de datos
+            _context.Tasks.Add(task);
+            _context.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = task.Id }, task);  // Devuelve una respuesta con la tarea creada
+            return CreatedAtRoute("DefaultApi", new { id = task.Id }, task);
         }
 
         // PUT: api/Tasks/5
@@ -48,33 +48,33 @@ namespace TaskManagerAPI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);  // Valida el modelo antes de actualizar la tarea
+                return BadRequest(ModelState);
             }
 
             if (id != task.Id)
             {
-                return BadRequest();  // Verifica que el ID de la tarea coincida con el ID en la URL
+                return BadRequest();
             }
 
-            _context.Entry(task).State = System.Data.Entity.EntityState.Modified;  // Marca la tarea como modificada
-            _context.SaveChanges();  // Guarda los cambios en la base de datos
+            _context.Entry(task).State = System.Data.Entity.EntityState.Modified;
+            _context.SaveChanges();
 
-            return StatusCode(HttpStatusCode.NoContent);  // Devuelve un estado 204
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // DELETE: api/Tasks/5
         public IHttpActionResult DeleteTask(int id)
         {
-            Task task = _context.Tasks.Find(id);  // Busca una tarea por ID
+            Task task = _context.Tasks.Find(id);
             if (task == null)
             {
-                return NotFound();  // Devuelve 404 si la tarea no se encuentra
+                return NotFound();
             }
 
-            _context.Tasks.Remove(task);  // Elimina la tarea
-            _context.SaveChanges();  // Guarda los cambios en la base de datos
+            _context.Tasks.Remove(task);
+            _context.SaveChanges();
 
-            return Ok(task);  // Devuelve la tarea eliminada
+            return Ok(task);
         }
     }
 }

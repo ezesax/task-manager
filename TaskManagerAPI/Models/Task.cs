@@ -18,7 +18,7 @@ namespace TaskManagerAPI.Models
 
         public int UserId { get; set; }
 
-        public int? ProjectId { get; set; }  // Campo opcional para asociar la tarea con un proyecto
+        public int? ProjectId { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
