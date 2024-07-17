@@ -165,3 +165,5 @@ C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\bin\Quartz.xml
 C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\bin\Quartz.Extensions.DependencyInjection.xml
 C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\bin\Quartz.Extensions.Hosting.xml
 C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\bin\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\ezequ\source\repos\TaskManagerAPI\TaskManagerAPI\bin\Microsoft.Extensions.DependencyInjection.xml
