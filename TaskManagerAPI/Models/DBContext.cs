@@ -12,5 +12,7 @@ namespace TaskManagerAPI.Models
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Currency> Currencies { get; set; }
+
     }
 }

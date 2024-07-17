@@ -6,6 +6,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Web.Http;
 using System;
+using Microsoft.Extensions.DependencyInjection;
+using Quartz;
+using Quartz.Impl;
+using Quartz.Spi;
 
 [assembly: OwinStartup(typeof(TaskManagerAPI.Startup))]
 
@@ -15,9 +19,6 @@ namespace TaskManagerAPI
     {
         public void Configuration(IAppBuilder app)
         {
-            // Configura CORS si es necesario
-            //app.UseCors(CorsOptions.AllowAll);
-
             var issuer = "https://localhost:44351";
             var audience = "TaskManagerAPI";
             var secret = "dGhpcyBzaGFyZCBpcyBsb25nIGVuZCBjYW5ub3QgdGVsbCBjb3N0";
